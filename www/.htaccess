@@ -1,0 +1,53 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+<IfModule mod_autoindex.c>
+	Options -Indexes
+</IfModule>
+
+# enable cool URL
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	# RewriteBase /
+</IfModule>
+
+# rewrite "www.example.com -> example.com"
+#<IfModule mod_rewrite.c>
+#	RewriteCond %{HTTPS} !=on
+#	RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#	RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+#</IfModule>
+
+# rewrite "example.com -> www.example.com"
+#<IfModule mod_rewrite.c>
+#	RewriteCond %{HTTPS} !=on
+#	RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+#	RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#</IfModule>
+
+# front nette controller
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+</IfModule>
+
+# built-in filename-based cache busting. rewrites /css/style.20110203.css -> /css/style.css
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.+)\.(\d+)\.(js|css|png|jpg|jpeg|gif)$ $1.$3 [L]
+</IfModule>
+
+# enable gzip compression
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+</IfModule>
+
+# allow combined JavaScript & CSS. Inside of script.combined.js you could use <!--#include file="script.js" -->
+<IfModule mod_include.c>
+	<FilesMatch "\.combined\.(js|css)$">
+		Options +Includes
+		SetOutputFilter INCLUDES
+	</FilesMatch>
+</IfModule>

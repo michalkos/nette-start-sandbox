@@ -1,0 +1,5 @@
+services:
+	model: Model( @database )
+	database: @Nette\Database\Connection
+	authenticator: Authenticator( @database::table(users) )
+	# cacheStorage: Nette\Caching\Storages\DevNullStorage

@@ -1,0 +1,45 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+	php:
+		date.timezone: Europe/Prague
+		# session.save_path: "%tempDir%/sessions"
+		# zlib.output_compression: yes
+
+	parameters:
+		database:
+			driver: mysql
+			host: localhost
+			dbname: test
+			user: root
+			password:
+
+	nette:
+		debugger:
+			email: 'my@email.tld'
+			maxLen: 512
+			maxDepth: 3
+			editor: 'txmt://open/?url=file://%file&line=%line' # editor -> http://pla.nette.org/cs/jak-otevrit-soubor-z-debuggeru-v-editoru
+		session:
+			# autoStart: TRUE
+			# expiration: '+30 days'
+		container:
+			debugger: TRUE
+		database:
+			default:
+				dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+				user: %database.user%
+				password: %database.password%
+
+	includes:
+		- services.neon
+		- factories.neon
+		- models.neon
+
+production < common:
+
+development < common:
