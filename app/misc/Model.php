@@ -8,15 +8,15 @@ class Model extends Nette\Object
 {
 	
 	/** @var Nette\Database\Connection */
-	protected $db;
+	protected $connection;
 	
 	
 	/**
-	 * @param Nette\Database\Connection $database
+	 * @param Nette\Database\Connection $connection
 	 */
-	public function __construct(Nette\Database\Connection $database)
+	public function __construct(Nette\Database\Connection $connection)
 	{
-		$this->db = $database;
+		$this->connection = $connection;
 	}
 	
 	
@@ -26,7 +26,7 @@ class Model extends Nette\Object
 	 */
 	public function getConnection()
 	{
-		return $this->db;
+		return $this->connection;
 	}
 
 
@@ -58,7 +58,7 @@ class Model extends Nette\Object
 	 */
 	public function table($table)
 	{
-		return $this->db->table($table);
+		return $this->connection->table($table);
 	}
 	
 	
@@ -70,7 +70,7 @@ class Model extends Nette\Object
 	public function query($sql)
 	{
 		$args = func_get_args();
-		return $this->db->queryArgs(array_shift($args), $args);
+		return $this->connection->queryArgs(array_shift($args), $args);
 	}
 	
 	
