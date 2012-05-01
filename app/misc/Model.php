@@ -127,6 +127,43 @@ class Model extends Nette\Object
 		
 		return $this->table($table)->where($where)->delete();
 	}
-	
+
+
+
+	/**
+	 * @param string $name
+	 * @return Nette\Database\Table\Selection
+	 */
+	public function __get($name)
+	{
+		return $this->table($name);
+	}
+
+
+
+	/**
+	 * @param string $name
+	 * @param array $args
+	 * @return Nette\Database\Table\Selection
+	 */
+	public function __call($name, $args)
+	{
+		$selection = $this->table($name);
+
+		$argsCount = count($args);
+		if ($argsCount == 1) {
+			if (is_int($args[0])) {
+				$selection = $selection->where($selection->getPrimary(), $args[0]);
+
+			} elseif (is_array($args[0])) {
+				$selection = $selection->where($args[0]);
+			}
+
+		} elseif ($argsCount == 2) {
+			$selection = $selection->where($args[0], $args[1]);
+		}
+
+		return $selection;
+	}
 
 }
