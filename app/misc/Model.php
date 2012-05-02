@@ -134,7 +134,7 @@ class Model extends Nette\Object
 	 * @param string $name
 	 * @return Nette\Database\Table\Selection
 	 */
-	public function __get($name)
+	public function &__get($name)
 	{
 		return $this->table($name);
 	}
