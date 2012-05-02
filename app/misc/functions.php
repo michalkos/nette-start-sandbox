@@ -44,23 +44,24 @@ function cl($instance)
 
 
 /**
- * @param $var
+ * @param mixed $var
+ * @param int $maxLen
+ * @param int $maxDepth
  * @return mixed
  */
-function deepDump($var)
+function deepDump($var, $maxLen = 4086, $maxDepth = 8)
 {
-	$maxLen = Debugger::$maxLen;
-	$maxDepth = Debugger::$maxDepth;
-
-	Debugger::$maxLen = 4086;
-	Debugger::$maxDepth = 8;
+	$prev_maxLen = Debugger::$maxLen;
+	$prev_maxDepth = Debugger::$maxDepth;
+	Debugger::$maxLen = $maxLen;
+	Debugger::$maxDepth = $maxDepth;
 
 	foreach (func_get_args() as $arg) {
 		Debugger::dump($arg);
 	}
 
-	Debugger::$maxLen = $maxLen;
-	Debugger::$maxDepth = $maxDepth;
+	Debugger::$maxLen = $prev_maxLen;
+	Debugger::$maxDepth = $prev_maxDepth;
 
 	return $var;
 }
@@ -84,20 +85,21 @@ function barDump($var, $title = NULL)
  * Shortcut for Debugger::barDump
  * @param mixed $var
  * @param mixed $title optional title
+ * @param int $maxLen
+ * @param int $maxDepth
  * @return mixed variable itself
  */
-function deepBarDump($var, $title = NULL)
+function deepBarDump($var, $title = NULL, $maxLen = 4086, $maxDepth = 8)
 {
-	$maxLen = Debugger::$maxLen;
-	$maxDepth = Debugger::$maxDepth;
-
-	Debugger::$maxLen = 4086;
-	Debugger::$maxDepth = 8;
+	$prev_maxLen = Debugger::$maxLen;
+	$prev_maxDepth = Debugger::$maxDepth;
+	Debugger::$maxLen = $maxLen;
+	Debugger::$maxDepth = $maxDepth;
 
 	$dump = Debugger::dump($var, $title);
 
-	Debugger::$maxLen = $maxLen;
-	Debugger::$maxDepth = $maxDepth;
+	Debugger::$maxLen = $prev_maxLen;
+	Debugger::$maxDepth = $prev_maxDepth;
 
 	return $dump;
 }
