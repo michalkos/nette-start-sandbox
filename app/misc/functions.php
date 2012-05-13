@@ -96,7 +96,7 @@ function deepBarDump($var, $title = NULL, $maxLen = 4086, $maxDepth = 8)
 	Debugger::$maxLen = $maxLen;
 	Debugger::$maxDepth = $maxDepth;
 
-	$dump = Debugger::dump($var, $title);
+	$dump = Debugger::barDump($var, $title);
 
 	Debugger::$maxLen = $prev_maxLen;
 	Debugger::$maxDepth = $prev_maxDepth;
