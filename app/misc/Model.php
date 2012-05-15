@@ -9,7 +9,11 @@ class Model extends Nette\Object
 	
 	/** @var Nette\Database\Connection */
 	protected $connection;
-	
+
+	/** @var bool Use camel table name with __call. e.q. usersData converts to users_data */
+	public $useCamelTableCall = TRUE;
+
+
 	
 	/**
 	 * @param Nette\Database\Connection $connection
@@ -137,6 +141,11 @@ class Model extends Nette\Object
 	 */
 	public function __call($name, $args)
 	{
+		if ($this->useCamelTableCall) {
+			$name = preg_replace('#(.)(?=[A-Z])#', '$1_', $name);
+			$name = strtolower($name);
+		}
+
 		$selection = $this->table($name);
 
 		$argsCount = count($args);
