@@ -103,3 +103,15 @@ function deepBarDump($var, $title = NULL, $maxLen = 4086, $maxDepth = 8)
 
 	return $dump;
 }
+
+
+
+/**
+ * Shortcut for Debugger::fireLog
+ * @param mixed $var
+ * @return bool
+ */
+function fireLog($var)
+{
+	return Debugger::fireLog($var);
+}
