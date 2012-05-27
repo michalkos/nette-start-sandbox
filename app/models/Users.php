@@ -27,7 +27,7 @@ class Users extends BaseModel
 	 */
 	public function getBy($key, $value = FALSE)
 	{
-		if (is_array($key) || $value === FALSE) {
+		if (is_array($key) OR $value === FALSE) {
 			$where = $key;
 
 		} else {
