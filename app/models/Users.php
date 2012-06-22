@@ -9,13 +9,18 @@ namespace Model;
 class Users extends BaseModel
 {
 
+	/** @var string */
+	protected $primaryTable = 'users';
+
+
+
 	/**
 	 * @param int $id
 	 * @return \Nette\Database\Table\ActiveRow or FALSE
 	 */
 	public function get($id)
 	{
-		return $this->model->table('users')->get($id);
+		return $this->table->get($id);
 	}
 
 
@@ -34,7 +39,7 @@ class Users extends BaseModel
 			$where = array($key => $value);
 		}
 
-		return $this->model->table('users')->where($where)->fetch();
+		return $this->table->where($where)->fetch();
 	}
 
 }

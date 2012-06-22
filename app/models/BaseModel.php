@@ -20,6 +20,9 @@ abstract class BaseModel extends Nette\Object
 	
 	/** @var bool */
 	protected $modelStarted = FALSE;
+
+	/** @var string */
+	protected $primaryTable;
 	
 	
 	
@@ -52,6 +55,38 @@ abstract class BaseModel extends Nette\Object
 	public function setContext(Nette\DI\Container $context)
 	{
 		$this->context = $context;
+	}
+
+
+
+	/**
+	 * @param string $table
+	 * @throws \Nette\UnexpectedValueException
+	 * @return \Nette\Database\Table\Selection
+	 */
+	public function getTable($table = NULL)
+	{
+		if (empty($table)) {
+			if ( ! isset($this->primaryTable)) {
+				throw new Nette\UnexpectedValueException(__METHOD__ . ': Name of primary table is not set');
+			}
+
+			$table = $this->primaryTable;
+		}
+
+		return $this->model->table($table);
+	}
+
+
+
+	/**
+	 * @param string $table
+	 * @throws \Nette\UnexpectedValueException
+	 * @return \Nette\Database\Table\Selection
+	 */
+	public function table($table = NULL)
+	{
+		return $this->table($table);
 	}
 	
 }
