@@ -23,6 +23,9 @@ abstract class BaseModel extends Nette\Object
 
 	/** @var string */
 	protected $primaryTable;
+
+	/** @var \Nette\Database\Table\Selection */
+	private $table;
 	
 	
 	
@@ -60,33 +63,33 @@ abstract class BaseModel extends Nette\Object
 
 
 	/**
-	 * @param string $table
+	 * @param string $name
 	 * @throws \Nette\UnexpectedValueException
 	 * @return \Nette\Database\Table\Selection
 	 */
-	public function getTable($table = NULL)
+	public function table($name = NULL)
 	{
-		if (empty($table)) {
+		if (empty($name)) {
 			if ( ! isset($this->primaryTable)) {
 				throw new Nette\UnexpectedValueException(__METHOD__ . ': Name of primary table is not set');
 			}
 
-			$table = $this->primaryTable;
+			$name = $this->primaryTable;
 		}
 
-		return $this->model->table($table);
+		return $this->model->table($name);
 	}
 
 
 
 	/**
-	 * @param string $table
+	 * @param string $name
 	 * @throws \Nette\UnexpectedValueException
 	 * @return \Nette\Database\Table\Selection
 	 */
-	public function table($table = NULL)
+	public function getTable($name = NULL)
 	{
-		return $this->getTable($table);
+		return $this->table($name);
 	}
 	
 }
