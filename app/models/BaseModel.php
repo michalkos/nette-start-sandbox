@@ -86,7 +86,7 @@ abstract class BaseModel extends Nette\Object
 	 */
 	public function table($table = NULL)
 	{
-		return $this->table($table);
+		return $this->getTable($table);
 	}
 	
 }
