@@ -7,7 +7,6 @@
 common:
 	php:
 		date.timezone: Europe/Prague
-		# session.save_path: "%tempDir%/sessions"
 		# zlib.output_compression: yes
 
 	parameters:
@@ -27,6 +26,7 @@ common:
 		session:
 			# autoStart: TRUE
 			# expiration: '+30 days'
+			# savePath: "%tempDir%/sessions"
 		container:
 			debugger: TRUE
 		database:
