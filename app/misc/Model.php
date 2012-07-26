@@ -47,6 +47,7 @@ class Model extends Nette\Object
 		
 		if (class_exists($class)) {
 			$model = new $class($this);
+
 		} else {
 			$model = new $name($this);
 		}
@@ -102,11 +103,11 @@ class Model extends Nette\Object
 	 */
 	public function update($table, $values, $where = NULL, $primaryKey = 'id')
 	{
-		if(is_null($where)) {
+		if (is_null($where)) {
 			return $this->table($table)->update($values);
 			
 		} else {
-			if(is_int($where) && $where > 0) {
+			if (is_int($where) && $where > 0) {
 				$where = array($primaryKey => $where);
 			}
 			
@@ -125,7 +126,7 @@ class Model extends Nette\Object
 	 */
 	public function delete($table, $where, $primaryKey = 'id')
 	{
-		if(is_int($where) && $where > 0) {
+		if (is_int($where) && $where > 0) {
 			$where = array($primaryKey => $where);
 		}
 		
