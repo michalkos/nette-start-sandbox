@@ -25,8 +25,11 @@
 #	RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 #</IfModule>
 
-# front nette controller
 <IfModule mod_rewrite.c>
+	# prevents files starting with dot to be viewed by browser
+	RewriteRule /\.|^\. - [F]
+
+	# front controller
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
