@@ -23,9 +23,6 @@ abstract class BaseModel extends Nette\Object
 
 	/** @var string */
 	protected $primaryTable;
-
-	/** @var \Nette\Database\Table\Selection */
-	private $table;
 	
 	
 	
@@ -78,18 +75,6 @@ abstract class BaseModel extends Nette\Object
 		}
 
 		return $this->model->table($name);
-	}
-
-
-
-	/**
-	 * @param string $name
-	 * @throws \Nette\UnexpectedValueException
-	 * @return \Nette\Database\Table\Selection
-	 */
-	public function getTable($name = NULL)
-	{
-		return $this->table($name);
 	}
 	
 }

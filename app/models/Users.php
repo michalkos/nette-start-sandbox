@@ -20,7 +20,7 @@ class Users extends BaseModel
 	 */
 	public function get($id)
 	{
-		return $this->table->get($id);
+		return $this->table()->get($id);
 	}
 
 
@@ -39,7 +39,7 @@ class Users extends BaseModel
 			$where = array($key => $value);
 		}
 
-		return $this->table->where($where)->fetch();
+		return $this->table()->where($where)->fetch();
 	}
 
 }
